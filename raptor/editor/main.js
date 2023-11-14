@@ -5,20 +5,20 @@ function convert(code) {
   
     for (let i = 0; i < code.length; i++) {
       const c = code[i];
-  
+    
       if (c === "{") {
-        conv_code += "\n" + "\t".repeat(Tcnt);
+        conv_code += "<br>" + "&nbsp;".repeat(Tcnt);
         conv_code += queue + ":";
         queue = "";
         Tcnt += 1;
       } else if (c === "}") {
-        conv_code += "\n" + "\t".repeat(Tcnt);
+        conv_code +=  "&nbsp;".repeat(Tcnt);
         conv_code += queue;
         queue = "";
         Tcnt -= 1;
       } else if (c === ";") {
-        conv_code += "\n" + "\t".repeat(Tcnt);
-        conv_code += queue;
+        conv_code += "<br>" + "&nbsp;".repeat(Tcnt);
+        conv_code += queue ;
         queue = "";
       } else {
         queue += c;
@@ -28,8 +28,11 @@ function convert(code) {
       conv_code = conv_code.replace("--", "-=1");
     }
   
+    
+  
     return conv_code.trim();
   }
+  
 
 var ID = 0;
 var pointID = 0;
@@ -344,7 +347,7 @@ function loadJson(load){
     ID = 0;
     pointID = 0;
     var save = JSON.parse(load);
-    //console.log(save);
+    console.log(save);
     var pr = [];
     var ln = [];
     
@@ -438,8 +441,7 @@ function run(command){
         if(!command.length){
             console.log("<div style='color: #25b94e'>Program started!</div>");
             var doNotUseThisName = interpreter();
-            convert(doNotUseThisName);
-            console.log(doNotUseThisName);  //2023.10.11 (김호탁)코드추가
+            console.log(convert(doNotUseThisName));  //2023.10.11 (김호탁)코드추가
         }
         else{
             var doNotUseThisName = command;
