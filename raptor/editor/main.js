@@ -1,3 +1,36 @@
+function convert(code) {
+    let Tcnt = 0;
+    let conv_code = "";
+    let queue = "";
+  
+    for (let i = 0; i < code.length; i++) {
+      const c = code[i];
+  
+      if (c === "{") {
+        conv_code += "\n" + "\t".repeat(Tcnt);
+        conv_code += queue + ":";
+        queue = "";
+        Tcnt += 1;
+      } else if (c === "}") {
+        conv_code += "\n" + "\t".repeat(Tcnt);
+        conv_code += queue;
+        queue = "";
+        Tcnt -= 1;
+      } else if (c === ";") {
+        conv_code += "\n" + "\t".repeat(Tcnt);
+        conv_code += queue;
+        queue = "";
+      } else {
+        queue += c;
+      }
+  
+      conv_code = conv_code.replace("++", "+=1");
+      conv_code = conv_code.replace("--", "-=1");
+    }
+  
+    return conv_code.trim();
+  }
+
 var ID = 0;
 var pointID = 0;
 var buttonID = 0;
@@ -71,7 +104,7 @@ function update(){
         }
     }
     ctx.restore();
-    ctx.fillStyle = "#4bbf6b";
+    ctx.fillStyle = "#bbb9b9";  
     ctx.fillRect(0,0,200,c.height);
     
     for(i=0; i<pallet.length; i++){
@@ -405,7 +438,8 @@ function run(command){
         if(!command.length){
             console.log("<div style='color: #25b94e'>Program started!</div>");
             var doNotUseThisName = interpreter();
-            console.log(doNotUseThisName)//2023.10.11 (김호탁)코드추가
+            convert(doNotUseThisName);
+            console.log(doNotUseThisName);  //2023.10.11 (김호탁)코드추가
         }
         else{
             var doNotUseThisName = command;
@@ -460,7 +494,7 @@ function run(command){
             }
             else{
                 console.log("<i>"+doNotUseThisName+"</i>");
-                console.log(eval(doNotUseThisName));
+                //console.log(eval(doNotUseThisName));
             }
         })();
         
@@ -491,7 +525,7 @@ function resize(){
     myCanvas.style.top = yOffset + "px";
     myCanvas.style.right = c.width + "px";
     myCanvas.width = window.innerWidth-c.width-8;
-    myCanvas.height = myCanvas.width/16*9-8;
+    myCanvas.height = myCanvas.width/5300;         // 높이 맞추기 = 정재형 
     document.getElementById("console-box").style.width = splitX - 8 + "px";
     document.getElementById("console-prompt").style.width = splitX - 16 + "px";
     document.getElementById("console-box").style.height = window.innerHeight - myCanvas.height - 8 -4 -h -yOffset + "px";

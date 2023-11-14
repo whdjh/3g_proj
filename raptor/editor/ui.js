@@ -20,8 +20,8 @@ button.prototype = {
         
         ctx.lineJoin = "round";
         ctx.lineWidth = cornerRadius;
-        ctx.fillStyle = "#4bbf6b";
-        ctx.strokeStyle = "#4bbf6b";
+        ctx.fillStyle = "#bbb9b9";
+        //ctx.strokeStyle = "#4bbf6b";
         
         ctx.shadowBlur=10;
         ctx.shadowColor="black";
@@ -43,7 +43,7 @@ button.prototype = {
         ctx.shadowOffsetY=0;
         ctx.fill();
         
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.font="20px Roboto"; 
         ctx.textAlign="center"; 
         ctx.fillText(this.text,this.x+this.w/2, this.y+this.h/1.5);
